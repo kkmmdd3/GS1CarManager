@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GS1 Car Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="title_carRepairShop">Car repair shop</string>
+    <string name="title_atTheRepairShop">At the repair shop</string>
+    <string name="title_selfRepair">Self-repair</string>
+    <string name="title_myCar">My car</string>
+
+    <string name="name_engineOil">Engine Oil</string>
+    <string name="name_airConditioner">Air Conditioner Filter</string>
+    <string name="name_battery">Battery</string>
+    <string name="name_tire">Tire</string>
+</resources>
