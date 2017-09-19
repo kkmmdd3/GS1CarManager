@@ -1,1 +1,1 @@
-GS1 Car Manager
+GS1 Car Manager Android Application
