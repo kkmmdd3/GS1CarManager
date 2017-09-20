@@ -31,6 +31,20 @@ public class FirstFragment extends Fragment {
     View view_imageButton_engineOil, view_imageButton_airConditioner, view_imageButton_battery, view_imageButton_tire;
     String gln = "8801111111119"; // my home이 gln 초기값(자가 수리 대비)
 
+    long time;
+    SimpleDateFormat dayTime, dayTime2;
+    String eventTime, eventTimeZoneOffset;
+    String action = "OBSERVE";
+    String bizStep = "urn:epcglobal:cbv:bizstep:replacing";
+    String disposition = "";
+    String sgtin_car = "8800026910115";
+    String vin = "KMHFG41EBCA166142";
+    String sgtin, xml_doc;
+
+    static int engine_oil_replacing = 0;
+    static int airconditioner_filter_replacing = 0;
+    static int refreshingFragment = 0;
+
     public FirstFragment() {
     }
 
@@ -77,15 +91,15 @@ public class FirstFragment extends Fragment {
                 switch(selected){
                     case 0:
                         gln = contents;
-                        if(contents.equals("2125783767020")) {
+                        if(contents.equals("8800026900122")) {
                             Snackbar.make(getView(), "나래모터스(주), 서울 강남구 개포로 258, 02-529-1052", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
-                        else if(contents.equals("4349572948041")) {
+                        else if(contents.equals("8800026900139")) {
                             Snackbar.make(getView(), "둔산자동차공업사, 대전 서구 대덕대로 185번길 13, 042-472-8573", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
-                        else if(contents.equals("5058396165051")) {
+                        else if(contents.equals("8800026900146")) {
                         Snackbar.make(getView(), "해운대종합정비(주), 부산 해운대로 1101, 4, 051-703-7009", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         }
@@ -95,30 +109,25 @@ public class FirstFragment extends Fragment {
                         }
                         break;
                     case 1:
+                        engine_oil_replacing = 1;
                         if (contents.equals("8801470205832")) {
                             Snackbar.make(getView(), "Kixx 엔진오일 (휘발유), 제조사: GS칼텍스, 판매사: (주)카앤후(경기 하남시 동남로 424번길 79-24, 02-448-1293)", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
-                            SecondFragment.refreshingFragment = 1;
+                            refreshingFragment = 1;
                         }
                         else {
                             Snackbar.make(getView(), "엔진오일의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
-                        // TO DO : epcis 문서 만들어서 서버에 보내기.
-                        // TO DO : db 업데이트하고 Fragment refresh!
-                        long time = System.currentTimeMillis();
-                        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd");
-                        SimpleDateFormat dayTime2 = new SimpleDateFormat("hh:mm:ss");
-                        String eventTime = dayTime.format(new Date(time)) + "T" + dayTime2.format(new Date(time));
-                        String eventTimeZoneOffset = "+03:00";
+                        time = System.currentTimeMillis();
+                        dayTime = new SimpleDateFormat("yyyy-MM-dd");
+                        dayTime2 = new SimpleDateFormat("hh:mm:ss");
+                        eventTime = dayTime.format(new Date(time)) + "T" + dayTime2.format(new Date(time));
+                        eventTimeZoneOffset = "+9:00";
 
-                        String action = "OBSERVE";
-                        String bizStep = "urn:epcglobal:cbv:bizstep:replacing";
-                        String disposition = "";
-                        String vin = "KMHFG41EBCA166142";
-                        String sgtin = contents;
+                        sgtin = contents;
 
-                        String xml_doc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        xml_doc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                 "<!DOCTYPE project>\n" +
                                 "<epcis:EPCISDocument xmlns:epcis=\"urn:epcglobal:epcis:xsd:1\"\n" +
                                 "\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -130,7 +139,7 @@ public class FirstFragment extends Fragment {
                                 "\t\t\t\t<eventTime>" + eventTime + "</eventTime>\n" +
                                 "\t\t\t\t<eventTimeZoneOffset>"+ eventTimeZoneOffset + "</eventTimeZoneOffset>\n" +
                                 "\t\t\t\t<epcList>\n" +
-                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ contents + "</epc>\n" +
+                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "</epc>\n" +
                                 "\t\t\t\t</epcList>\n" +
                                 "\t\t\t\t<action>" + action + "</action>\n" +
                                 "\t\t\t\t<bizStep>" + bizStep + "</bizStep>\n" +
@@ -155,7 +164,59 @@ public class FirstFragment extends Fragment {
                                 .setAction("Action", null).show();
                         break;
                     case 2:
-                        Snackbar.make(getView(), "에어컨필터의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)
+                        airconditioner_filter_replacing = 1;
+
+                        if (contents.equals("8801324207210")) {
+                            Snackbar.make(getView(), "불스원 항균 에어컨 히터 필터(1호), 제조사: 불스원, 판매사: (주)불스원(서울특별시 강남구 테헤란로 418, 02-2106-7865)", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            refreshingFragment = 1;
+                        }
+                        else {
+                            Snackbar.make(getView(), "에어컨필터의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                        time = System.currentTimeMillis();
+                        dayTime = new SimpleDateFormat("yyyy-MM-dd");
+                        dayTime2 = new SimpleDateFormat("hh:mm:ss");
+                        eventTime = dayTime.format(new Date(time)) + "T" + dayTime2.format(new Date(time));
+                        eventTimeZoneOffset = "+9:00";
+
+                        sgtin = contents;
+
+                        xml_doc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                "<!DOCTYPE project>\n" +
+                                "<epcis:EPCISDocument xmlns:epcis=\"urn:epcglobal:epcis:xsd:1\"\n" +
+                                "\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                                "\txmlns:car=\"urn:autoidlabsk:epcisapp:car\" creationDate=\"" + eventTime + ".720-04:00\"\n" +
+                                "\tschemaVersion=\"1.2\">\n" +
+                                "\t<EPCISBody>\n" +
+                                "\t\t<EventList>\n" +
+                                "\t\t\t<ObjectEvent>\n" +
+                                "\t\t\t\t<eventTime>" + eventTime + "</eventTime>\n" +
+                                "\t\t\t\t<eventTimeZoneOffset>"+ eventTimeZoneOffset + "</eventTimeZoneOffset>\n" +
+                                "\t\t\t\t<epcList>\n" +
+                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "</epc>\n" +
+                                "\t\t\t\t</epcList>\n" +
+                                "\t\t\t\t<action>" + action + "</action>\n" +
+                                "\t\t\t\t<bizStep>" + bizStep + "</bizStep>\n" +
+                                "\t\t\t\t<disposition>" + disposition + "</disposition>\n" +
+                                "\t\t\t\t<readPoint>\n" +
+                                "\t\t\t\t\t<id>urn:epc:id:gln:" + gln + "</id>\n" +
+                                "\t\t\t\t</readPoint>\n" +
+                                "\t\t\t\t<bizLocation>\n" +
+                                "\t\t\t\t\t<id>urn:epc:id:gln:" + gln + "</id>\n" +
+                                "\t\t\t\t</bizLocation>\n" +
+                                "\t\t\t\t<extension>\n" +
+                                "\t\t\t\t</extension>\n" +
+                                "\t\t\t\t<car:vin xmlns:car=\"urn:autoidlabsk:epcisapp:car\">" + vin + "</car:vin>\n" +
+                                "\t\t\t\t<car:airconditioner_filter xmlns:car=\"urn:autoidlabsk:epcisapp:car\">" + sgtin + "</car:airconditioner_filter>\n" +
+                                "\t\t\t</ObjectEvent>\n" +
+                                "\t\t</EventList>\n" +
+                                "\t</EPCISBody>\n" +
+                                "</epcis:EPCISDocument>";
+
+                        new UploadAsyncTask().execute(xml_doc);
+                        Snackbar.make(getView(), "EPCIS에 Airconditioner Filter Replacing 이벤트가 안전하게 저장되었습니다.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         break;
                     case 3:
