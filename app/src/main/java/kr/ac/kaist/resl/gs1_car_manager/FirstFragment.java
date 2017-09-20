@@ -34,6 +34,7 @@ public class FirstFragment extends Fragment {
     long time;
     SimpleDateFormat dayTime, dayTime2;
     String eventTime, eventTimeZoneOffset;
+    Date currentTime;
     String action = "OBSERVE";
     String bizStep = "urn:epcglobal:cbv:bizstep:replacing";
     String disposition = "";
@@ -121,8 +122,9 @@ public class FirstFragment extends Fragment {
                         }
                         time = System.currentTimeMillis();
                         dayTime = new SimpleDateFormat("yyyy-MM-dd");
-                        dayTime2 = new SimpleDateFormat("hh:mm:ss");
-                        eventTime = dayTime.format(new Date(time)) + "T" + dayTime2.format(new Date(time));
+                        dayTime2 = new SimpleDateFormat("HH:mm:ss");
+                        currentTime = new Date(time);
+                        eventTime = dayTime.format(currentTime) + "T" + dayTime2.format(currentTime);
                         eventTimeZoneOffset = "+9:00";
 
                         sgtin = contents;
@@ -139,7 +141,7 @@ public class FirstFragment extends Fragment {
                                 "\t\t\t\t<eventTime>" + eventTime + "</eventTime>\n" +
                                 "\t\t\t\t<eventTimeZoneOffset>"+ eventTimeZoneOffset + "</eventTimeZoneOffset>\n" +
                                 "\t\t\t\t<epcList>\n" +
-                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "</epc>\n" +
+                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "." + vin + "</epc>\n" +
                                 "\t\t\t\t</epcList>\n" +
                                 "\t\t\t\t<action>" + action + "</action>\n" +
                                 "\t\t\t\t<bizStep>" + bizStep + "</bizStep>\n" +
@@ -160,8 +162,16 @@ public class FirstFragment extends Fragment {
                                 "</epcis:EPCISDocument>";
 
                         new UploadAsyncTask().execute(xml_doc);
-                        Snackbar.make(getView(), "EPCIS에 Engine Oil Replacing 이벤트가 안전하게 저장되었습니다.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                Snackbar.make(getView(), "EPCIS에 Engine Oil Replacing 이벤트가 안전하게 저장되었습니다.", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        }, 1500);
+
                         break;
                     case 2:
                         if (contents.equals("8801324207210")) {
@@ -176,8 +186,9 @@ public class FirstFragment extends Fragment {
                         }
                         time = System.currentTimeMillis();
                         dayTime = new SimpleDateFormat("yyyy-MM-dd");
-                        dayTime2 = new SimpleDateFormat("hh:mm:ss");
-                        eventTime = dayTime.format(new Date(time)) + "T" + dayTime2.format(new Date(time));
+                        dayTime2 = new SimpleDateFormat("HH:mm:ss");
+                        currentTime = new Date(time);
+                        eventTime = dayTime.format(currentTime) + "T" + dayTime2.format(currentTime);
                         eventTimeZoneOffset = "+9:00";
 
                         sgtin = contents;
@@ -194,7 +205,7 @@ public class FirstFragment extends Fragment {
                                 "\t\t\t\t<eventTime>" + eventTime + "</eventTime>\n" +
                                 "\t\t\t\t<eventTimeZoneOffset>"+ eventTimeZoneOffset + "</eventTimeZoneOffset>\n" +
                                 "\t\t\t\t<epcList>\n" +
-                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "</epc>\n" +
+                                "\t\t\t\t\t<epc>urn:epc:id:sgtin:"+ sgtin_car + "." + vin + "</epc>\n" +
                                 "\t\t\t\t</epcList>\n" +
                                 "\t\t\t\t<action>" + action + "</action>\n" +
                                 "\t\t\t\t<bizStep>" + bizStep + "</bizStep>\n" +
@@ -215,8 +226,16 @@ public class FirstFragment extends Fragment {
                                 "</epcis:EPCISDocument>";
 
                         new UploadAsyncTask().execute(xml_doc);
-                        Snackbar.make(getView(), "EPCIS에 Airconditioner Filter Replacing 이벤트가 안전하게 저장되었습니다.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                Snackbar.make(getView(), "EPCIS에 Airconditioner Filter Replacing 이벤트가 안전하게 저장되었습니다.", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        }, 1500);
+
                         break;
                     case 3:
                         Snackbar.make(getView(), "배터리의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)

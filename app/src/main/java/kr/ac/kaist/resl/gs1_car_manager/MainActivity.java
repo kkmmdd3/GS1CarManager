@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // db part
-        dbHelper = new DBHelper(this.getApplicationContext(), "Test3.db", null, 1);
-        DBContents dbContents = new DBContents();
+        //dbHelper = new DBHelper(this.getApplicationContext(), "Test3.db", null, 1);
+        //DBContents dbContents = new DBContents();
         //dbHelper.drop("car_info");
         //dbHelper.drop("product");
         //dbHelper.drop("repair_shop");
-        dbContents.fillDB_car_info(dbHelper);
-        dbContents.fillDB_product(dbHelper);
-        dbContents.fillDB_repair_shop(dbHelper);
+        //dbContents.fillDB_car_info(dbHelper);
+        //dbContents.fillDB_product(dbHelper);
+        //dbContents.fillDB_repair_shop(dbHelper);
         //Log.w("repair_shop", "result:" + dbHelper.getResult_repair_shop());
         //Log.w("car_info", "result:" + dbHelper.getResult_car_info());
     }
