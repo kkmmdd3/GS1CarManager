@@ -39,7 +39,6 @@ public class SecondFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_second, container, false);
 
-        // To do : db에서 정보 가져오고, 변환되면 바로 반영되게 refresh해주기!
         listView = (ListView)rootView.findViewById(R.id.listView);
 
         adapter = new IconTextListAdapter(this.getContext());

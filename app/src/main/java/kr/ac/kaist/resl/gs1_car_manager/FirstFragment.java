@@ -29,7 +29,7 @@ public class FirstFragment extends Fragment {
     String formatName;
     View view_imageButton_carRepairShop;
     View view_imageButton_engineOil, view_imageButton_airConditioner, view_imageButton_battery, view_imageButton_tire;
-    String gln = "8801111111119"; // my home이 gln 초기값(자가 수리 대비)
+    String gln = "8800026900153"; // my home이 gln 초기값(자가 수리 대비)
 
     long time;
     SimpleDateFormat dayTime, dayTime2;
@@ -109,11 +109,11 @@ public class FirstFragment extends Fragment {
                         }
                         break;
                     case 1:
-                        engine_oil_replacing = 1;
                         if (contents.equals("8801470205832")) {
                             Snackbar.make(getView(), "Kixx 엔진오일 (휘발유), 제조사: GS칼텍스, 판매사: (주)카앤후(경기 하남시 동남로 424번길 79-24, 02-448-1293)", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             refreshingFragment = 1;
+                            engine_oil_replacing = 1;
                         }
                         else {
                             Snackbar.make(getView(), "엔진오일의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)
@@ -164,12 +164,11 @@ public class FirstFragment extends Fragment {
                                 .setAction("Action", null).show();
                         break;
                     case 2:
-                        airconditioner_filter_replacing = 1;
-
                         if (contents.equals("8801324207210")) {
                             Snackbar.make(getView(), "불스원 항균 에어컨 히터 필터(1호), 제조사: 불스원, 판매사: (주)불스원(서울특별시 강남구 테헤란로 418, 02-2106-7865)", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             refreshingFragment = 1;
+                            airconditioner_filter_replacing = 1;
                         }
                         else {
                             Snackbar.make(getView(), "에어컨필터의 바코드(sgtin)은 " + contents + "입니다.", Snackbar.LENGTH_LONG)
