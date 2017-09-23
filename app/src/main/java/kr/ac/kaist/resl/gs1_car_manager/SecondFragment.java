@@ -80,21 +80,21 @@ public class SecondFragment extends Fragment {
 
         name = "카파워 CP-20 점프스타터";
         //sgtin = "L000002390274";
-        sgtin = "8800026910022";
+        sgtin = "8800026910039";
         manufacturer = "인터아이넷";
         seller = "(주)바보사랑";
         adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.ic_icon_battery_white), name + "(" + sgtin + ")", "제조사: " + manufacturer, "판매사: " + seller));
 
         name = "금호타이어 245/45/18 MAJESTY";
         //sgtin = "L000002546243";
-        sgtin = "8800026910039";
+        sgtin = "8800026910046";
         manufacturer = "금호타이어";
         seller = "롯데오토케어";
         adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.ic_icon_tire_white), name + "(" + sgtin + ")", "제조사: " + manufacturer, "판매사: " + seller));
 
         name = "넥센타이어 245/45/18 NFERA AU5";
         //sgtin = "L000002546210";
-        sgtin = "8800026910046";
+        sgtin = "8800026910053";
         manufacturer = "넥센타이어";
         seller = "롯데오토케어";
         adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.ic_icon_tire_white), name + "(" + sgtin + ")", "제조사: " + manufacturer, "판매사: " + seller));

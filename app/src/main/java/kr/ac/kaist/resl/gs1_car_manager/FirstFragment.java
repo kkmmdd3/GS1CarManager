@@ -29,7 +29,7 @@ public class FirstFragment extends Fragment {
     String formatName;
     View view_imageButton_carRepairShop;
     View view_imageButton_engineOil, view_imageButton_airConditioner, view_imageButton_battery, view_imageButton_tire;
-    String gln = "8800026900153"; // my home이 gln 초기값(자가 수리 대비)
+    String gln = "8800026900191"; // my home이 gln 초기값(자가 수리 대비)
 
     long time;
     SimpleDateFormat dayTime, dayTime2;
@@ -92,15 +92,15 @@ public class FirstFragment extends Fragment {
                 switch(selected){
                     case 0:
                         gln = contents;
-                        if(contents.equals("8800026900122")) {
+                        if(contents.equals("8800026900092")) {
                             Snackbar.make(getView(), "나래모터스(주), 서울 강남구 개포로 258, 02-529-1052", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
-                        else if(contents.equals("8800026900139")) {
+                        else if(contents.equals("8800026900108")) {
                             Snackbar.make(getView(), "둔산자동차공업사, 대전 서구 대덕대로 185번길 13, 042-472-8573", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
-                        else if(contents.equals("8800026900146")) {
+                        else if(contents.equals("8800026900115")) {
                         Snackbar.make(getView(), "해운대종합정비(주), 부산 해운대로 1101, 4, 051-703-7009", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         }
